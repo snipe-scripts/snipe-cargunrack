@@ -3,15 +3,20 @@
 --------------- https://discord.gg/AeCVP2F8h7  -------------
 ---------------------------------------------------------------
 
+function Trim(value)
+    if not value then return nil end
+    return (string.gsub(value, '^%s*(.-)%s*$', '%1'))
+end
+
 lib.callback.register("snipe-cargunrack:server:isOwnedVehicle", function(source, plate)
     if Config.Framework == "qb" then
         local isOwned = MySQL.Sync.fetchScalar("SELECT 1 FROM player_vehicles WHERE plate = @plate", {
-            ["@plate"] = plate,
+            ["@plate"] = Trim(plate),
         })
         return isOwned
     elseif Config.Framework == "esx" then
         local isOwned = MySQL.Sync.fetchScalar("SELECT 1 FROM owned_vehicles WHERE plate = @plate", {
-            ["@plate"] = plate,
+            ["@plate"] = Trim(plate),
         })
         return isOwned
     end
