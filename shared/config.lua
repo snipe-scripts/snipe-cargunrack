@@ -1,8 +1,6 @@
-
 -----------------For support, scripts, and more----------------
 --------------- https://discord.gg/AeCVP2F8h7  -------------
 ---------------------------------------------------------------
-
 Config = {}
 
 -- if you have renamed your qb-core, es_extended, event names, make sure to change them. Based on this information your framework will be detected.
@@ -28,10 +26,11 @@ Config.AllowedCarsModel = {
 
 }
 
-Config.Inventory = "ox" -- qb || qs || ox || mf || codem
+Config.Inventory = "qb" -- qb || qs || ox || mf || codem
+Config.QBInventory = "new" -- new for new version, old for old version.
 
 -- if you set this as false and a player opens a vehicle is not owned by anyone, the gunrack will not appear after restart because the plate wont match!
-Config.AllowGunracksForOwnedVehicles = true -- if true, only owned vehicles will have gunracks.
+Config.AllowGunracksForOwnedVehicles = false -- if true, only owned vehicles will have gunracks.
 
 Config.AllowOnlyJobsToAccessGunracks = true -- if true, only the jobs listed in JobsToAccessGunracks will be able to access the gunracks.
 Config.JobsToAccessGunracks = {

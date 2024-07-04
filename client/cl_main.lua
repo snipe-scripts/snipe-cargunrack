@@ -2,7 +2,7 @@
 -----------------For support, scripts, and more----------------
 --------------- https://discord.gg/AeCVP2F8h7  -------------
 ---------------------------------------------------------------
-
+QBCore = exports['qb-core']:GetCoreObject()
 local function DoProgress(cb)
     if Config.Progress == "qb" then
         QBCore.Functions.Progressbar("opening-gunrack", "Opening Gunrack",  5000, false, true, {
@@ -44,8 +44,19 @@ local function OpenGunrack(plate, doProgress)
             return
         end
     end
-    if Config.Inventory == "qb" or Config.Inventory == "qs" then
-        TriggerServerEvent("inventory:server:OpenInventory", "stash", "gunrack_car_"..plate, {
+
+    if Config.Inventory == "qb" then
+	if Config.QBInventory == "old" then
+        	TriggerServerEvent("inventory:server:OpenInventory", "stash", "gunrack_car_"..plate, {
+            	maxweight = Config.StashSize,
+            	slots = Config.StashSlots,
+        	})
+		TriggerEvent("inventory:client:SetCurrentStash", "gunrack_car_"..plate)
+	elseif Config.QBInventory == "new" then
+        	TriggerServerEvent("snipe-cargunrack:server:openGunrack", plate)
+	end
+    elseif Config.Inventory == "qs" then
+	TriggerServerEvent("inventory:server:OpenInventory", "stash", "gunrack_car_"..plate, {
             maxweight = Config.StashSize,
             slots = Config.StashSlots,
         })

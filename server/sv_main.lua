@@ -2,7 +2,7 @@
 -----------------For support, scripts, and more----------------
 --------------- https://discord.gg/AeCVP2F8h7  -------------
 ---------------------------------------------------------------
-
+QBCore = exports['qb-core']:GetCoreObject()
 function Trim(value)
     if not value then return nil end
     return (string.gsub(value, '^%s*(.-)%s*$', '%1'))
@@ -32,5 +32,16 @@ RegisterNetEvent("snipe-cargunrack:server:registerStash", function(stashId, inve
         if not result then
             exports['mf-inventory']:createInventory(stashId, 'inventory', 'stash', stashId, Config.StashSize, Config.StashSlots)
         end
+    end
+end)
+
+RegisterNetEvent('snipe-cargunrack:server:openGunrack', function(plate)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    if Player then
+        exports['qb-inventory']:OpenInventory(src, 'gunrack_car_'..plate, {
+            maxweight = Config.StashSize,
+            slots = Config.StashSlots,
+        })
     end
 end)
